@@ -69,7 +69,6 @@ HitEnter MACRO
 	.code
 
 	push		eax
-
 	lea			eax, mString
 	push		eax
 	call		PrintString
@@ -107,11 +106,8 @@ ENDM
 	; Sets up assorted prompts to be displayed for the user. 
 
 	endl			EQU		<0dh, 0ah>		
-	student			BYTE	" CS 271 Program 6B by Aaron Thompson",0	
-	ec				BYTE	" **EC #1:  Number the problems and keep score.  At the end, report the number right/wrong.",endl
-					BYTE	" **EC #3:  Perform all console read/write operations using the Win32 API functions.",0
-
-	gameTitle		BYTE	" The Combinations Quiz Game!", 0				
+	student			BYTE	" Programmed by Aaron Thompson",0	
+	gameTitle		BYTE	" The Combinations Quiz!", 0				
 
 	gameIntro		BYTE	" A combination is the number of subsets of size r (or r-combinations)", endl
 					BYTE	" that can be chosen from a set of n elements. The formula for solving", endl
@@ -165,8 +161,6 @@ main PROC
 	push		OFFSET seperator
 	push		OFFSET gameIntro
 	push		OFFSET gameTitle
-	push		OFFSET ec
-	push		OFFSET student
 	call		Introduction
 
 GameBegins:
@@ -252,45 +246,27 @@ Introduction	PROC
 	push		ebp
 	mov			ebp, esp
 
-	; Prints programmer's name and assignment #. 
+	; Prints game title.
 
 	Print		[ebp+8]
 	HitEnter
 	HitEnter
 
-	; Prints extra-credit options.
+	; Prints an introduction for the user. 
 
 	Print		[ebp+12]
 	HitEnter
-	
+
 	; Prints a seperator bar to improve the user interface. 
 
 	HitEnter
-	Print		[ebp+24]
-	HitEnter
-	HitEnter
-
-	; Prints game title.
-
 	Print		[ebp+16]
-	HitEnter
-	HitEnter
-
-	; Prints an introduction for the user. 
-
-	Print		[ebp+20]
-	HitEnter
-
-	; Prints a seperator bar to improve the user interface. 
-
-	HitEnter
-	Print		[ebp+24]
 	HitEnter
 
 	; The code cleans up after itself and restores the registers as appropriate. 
 
 	pop		ebp
-	ret		16
+	ret		12
 
 Introduction	ENDP
 
